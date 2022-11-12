@@ -4,6 +4,7 @@ import Cavity from '../../../assets/images/cavity.png';
 import Teeth from '../../../assets/images/whitening.png';
 import Treatment from '../../../assets/images/treatment.png';
 import ServiceInfo from './ServiceInfo';
+import ButtonPrimary from '../../../Componentes/ButtonPrimary';
 
 
 const Service = () => {
@@ -48,7 +49,7 @@ const Service = () => {
                 <div className='lg:w-1/2'>
                     <h1 className="text-5xl font-bold">Exceptional Dental Care, on Your Terms</h1>
                     <p className="py-6">Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem quasi. In deleniti eaque aut repudiandae et a id nisi.</p>
-                    <button className="btn bg-gradient-to-r from-secondary to-primary btn-primary text-white">Get Started</button>
+                    <ButtonPrimary>Get Started</ButtonPrimary>
                 </div>
             </div>
         </div>
