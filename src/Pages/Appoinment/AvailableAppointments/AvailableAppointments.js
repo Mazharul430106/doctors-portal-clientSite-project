@@ -1,15 +1,17 @@
 import React, { useEffect, useState } from 'react';
-import {format} from 'date-fns';
+import { format } from 'date-fns';
 import AppiontmentOptions from '../AppointmentOptions/AppiontmentOptions';
+import BookingModal from '../BookingModal/BookingModal';
 
-const AvailableAppointments = ({selectedDate}) => {
+const AvailableAppointments = ({ selectedDate }) => {
     const [appiontmentOtions, setAppiontmentOtions] = useState([]);
+    const [treatment, setTreatment] = useState(null);
 
-    useEffect(()=>{
+    useEffect(() => {
         fetch('FakeData.json')
-        .then(res=> res.json())
-        .then(data=> setAppiontmentOtions(data))
-    },[])
+            .then(res => res.json())
+            .then(data => setAppiontmentOtions(data))
+    }, [])
 
     return (
         <section className='my-16'>
@@ -18,9 +20,17 @@ const AvailableAppointments = ({selectedDate}) => {
             </div>
             <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5'>
                 {
-                    appiontmentOtions.map(option=> <AppiontmentOptions key={option._id} option={option}></AppiontmentOptions>)
+                    appiontmentOtions.map(option => <AppiontmentOptions
+                        setTreatment={setTreatment}
+                        key={option._id} option={option}
+                    >
+                    </AppiontmentOptions>)
                 }
             </div>
+            {
+                treatment  &&
+                <BookingModal treatment={treatment}></BookingModal>
+            }
 
         </section>
     );

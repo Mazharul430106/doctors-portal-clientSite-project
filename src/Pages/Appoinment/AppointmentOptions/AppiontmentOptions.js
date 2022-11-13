@@ -1,7 +1,6 @@
 import React from 'react';
 
-const AppiontmentOptions = ({ option }) => {
-    console.log(option);
+const AppiontmentOptions = ({ option ,setTreatment}) => {
     const { name, slots } = option;
     return (
         <div className="card mx-auto bg-base-100 shadow-xl my-10 w-96 lg:w-full">
@@ -10,7 +9,7 @@ const AppiontmentOptions = ({ option }) => {
                 <p>{slots.length > 0 ? slots[0] : 'Try Another Day' }</p>
                 <p>{slots.length > 1 ? 'spaces' : 'space' } available</p>
                 <div className="card-actions justify-center">
-                    <button className="btn btn-primary text-white bg-secondary">Book Appiontment</button>
+                    <label onClick={()=>setTreatment(option)} htmlFor="booking-modal" className="btn bg-secondary text-white btn-primary ">Book Appiontment</label>
                 </div>
             </div>
         </div>
