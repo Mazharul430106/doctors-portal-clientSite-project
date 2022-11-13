@@ -44,9 +44,7 @@ const Banner = () => {
                         <p>Click the button to watch on Jetflix app.</p>
                     </div>
                 </div>
-
             </div>
-
         </div>
     );
 };
