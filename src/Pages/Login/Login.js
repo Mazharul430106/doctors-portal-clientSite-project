@@ -1,11 +1,22 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useForm } from "react-hook-form";
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../../Context/AuthProvider/AuthProvider';
 
 const Login = () => {
+
     const { register, formState: { errors }, handleSubmit } = useForm();
-    const handleLogin = data => {
-        console.log(data);
+    const {signInUser} = useContext(AuthContext);
+
+    const handleLogin = (data) => {
+        console.log(data.email, data.password);
+        signInUser(data.email, data.password)
+        .then(result=> {
+            const user = result.user;
+            console.log(user);
+        })
+        .catch(error=> console.log(error))
+
     }
 
     return (
@@ -21,7 +32,7 @@ const Login = () => {
                         </div>
                         <div className='w-full form-control max-w-xs'>
                             <label className='label'>Password</label>
-                            <input type='text' {...register("password", {
+                            <input type='password' {...register("password", {
                                 required: 'Password is required',
                                 minLength: {value : 6, message:"Pasword Must be at least 6 characture"}
                             })} className='input input-bordered' />

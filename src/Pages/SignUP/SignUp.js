@@ -1,14 +1,20 @@
-import React from 'react';
-import {Link} from 'react-router-dom';
+import React, { useContext } from 'react';
+import { Link } from 'react-router-dom';
 import { useForm } from "react-hook-form";
+import { AuthContext } from '../../Context/AuthProvider/AuthProvider';
 
 const SignUp = () => {
+    const { register, handleSubmit, formState: { errors } } = useForm();
+    const {createUser} = useContext(AuthContext);
 
-    const {register, handleSubmit, formState: { errors }} = useForm();
-
-    const handleSignUpForm = (data)=>{
-        console.log(data);
-        console.log(errors)
+    const handleSignUpForm = (data) => {
+        console.log(data.email, data.password)
+        createUser(data.email, data.password)
+        .then(resutl=> {
+            const user = resutl.user;
+            console.log(user); 
+        })
+        .catch(error=> console.log(error))
     }
 
     return (
@@ -19,18 +25,22 @@ const SignUp = () => {
                     <form onSubmit={handleSubmit(handleSignUpForm)}>
                         <div className='w-full form-control max-w-xs'>
                             <label className='label'>Name</label>
-                            <input type='text' {...register('name', {required: 'Name is Required'} )} className='input input-bordered'/>
-                            {errors.name  && <p className='text-red-500'>{errors.name.message}</p>}
+                            <input type='text' {...register('name', { required: 'Name is Required' })} className='input input-bordered' />
+                            {errors.name && <p className='text-red-500'>{errors.name.message}</p>}
                         </div>
                         <div className='w-full form-control max-w-xs'>
                             <label className='label'>Email</label>
-                            <input type='text' {...register('email', {required: 'Email is Required'} )} className='input input-bordered'/>
+                            <input type='text' {...register('email', { required: 'Email is Required' })} className='input input-bordered' />
                             {errors.email && <p className='text-red-500'>{errors.email.message}</p>}
                         </div>
 
                         <div className='w-full form-control max-w-xs'>
                             <label className='label'>Password</label>
-                            <input type='text' {...register('password', {required: 'Password is Required'})} className='input input-bordered'/>
+                            <input type='password' {...register('password', {
+                                required: 'Password is Required',
+                                minLength: {value: 6, message: 'Password must be at least 6 characture'},
+                                pattern: {value: /(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*]).{6,}/, message: 'Password must be strong'}
+                            })} className='input input-bordered' />
                             <span className='text-xs'>Forgot Password</span>
                             {errors.password && <p className='text-red-500'>{errors.password.message}</p>}
                         </div>
