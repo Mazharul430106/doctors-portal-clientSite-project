@@ -1,8 +1,9 @@
 import React from 'react';
 import { useForm } from "react-hook-form";
+import { Link } from 'react-router-dom';
 
 const Login = () => {
-    const { register, handleSubmit } = useForm();
+    const { register, formState: { errors }, handleSubmit } = useForm();
     const handleLogin = data => {
         console.log(data);
     }
@@ -15,19 +16,26 @@ const Login = () => {
                     <form onSubmit={handleSubmit(handleLogin)}>
                         <div className='w-full form-control max-w-xs'>
                             <label className='label'>Email</label>
-                            <input type='text' {...register("email")} className='input input-bordered' required />
+                            <input type='text' {...register("email", { required: 'Email is required' })} className='input input-bordered' />
+                            {errors.email && <p className='text-red-500' >{errors.email?.message}</p>}
                         </div>
                         <div className='w-full form-control max-w-xs'>
                             <label className='label'>Password</label>
-                            <input type='text' {...register("password")} className='input input-bordered' required />
+                            <input type='text' {...register("password", {
+                                required: 'Password is required',
+                                minLength: {value : 6, message:"Pasword Must be at least 6 characture"}
+                            })} className='input input-bordered' />
+
                             <span className='text-xs'>Forgot Password</span>
+                            {errors.password && <p className='text-red-500'>{errors.password?.message}</p>}
+
                         </div>
                         <div className='w-full form-control max-w-xs mt-5'>
                             <button type="submit" className='bg-secondary input text-white text-xl' >Login</button>
                         </div>
                         <div className='flex mt-2'>
                             <p className='mr-4'>New to Doctors Portal?</p>
-                            <p className='text-secondary'>Create new account</p>
+                            <Link to='/register' className='text-secondary'>Create new account</Link>
                         </div>
                         <div className="flex flex-col w-full border-opacity-50">
                             <div className="divider">OR</div>
