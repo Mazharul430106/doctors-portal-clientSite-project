@@ -9,7 +9,7 @@ import ButtonPrimary from '../../../Componentes/ButtonPrimary';
 const Banner = () => {
     return (
         <div>
-            <div className="hero flex justify-between py-10 pb-20 mx-5 lg:mx-0">
+            <div className="hero flex justify-between py-10 pb-20 px-5 lg:px-0">
                 <div className=" flex lg:justify-between items-center gap-20  flex-col lg:flex-row-reverse">
                     
                     <img src={Chare} alt='' className=" w-full rounded-lg shadow-2xl lg:w-1/2 ml-auto" />
