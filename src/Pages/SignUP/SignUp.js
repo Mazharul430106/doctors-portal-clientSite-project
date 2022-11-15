@@ -1,20 +1,35 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useForm } from "react-hook-form";
 import { AuthContext } from '../../Context/AuthProvider/AuthProvider';
+import {toast} from 'react-hot-toast';
 
 const SignUp = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
-    const {createUser} = useContext(AuthContext);
+    const {createUser, updateUser} = useContext(AuthContext);
+    const [signupError, setSignupError] = useState('');
+    console.log(signupError);
 
     const handleSignUpForm = (data) => {
+        setSignupError('')
+        console.log(data)
         console.log(data.email, data.password)
         createUser(data.email, data.password)
         .then(resutl=> {
             const user = resutl.user;
             console.log(user); 
+            toast('User Created Successfully'); 
+            const userInfo = {
+                displayName: data.name,
+            }
+            updateUser(userInfo)
+            .then(()=> {})
+            .catch(error=> console.log(error));
         })
-        .catch(error=> console.log(error))
+        .catch(error=> {
+            console.log(error);
+            setSignupError(error.message)
+        })
     }
 
     return (
@@ -44,6 +59,7 @@ const SignUp = () => {
                             <span className='text-xs'>Forgot Password</span>
                             {errors.password && <p className='text-red-500'>{errors.password.message}</p>}
                         </div>
+                        {signupError && <p className='text-red-500'>{signupError}</p> } 
 
                         <div className='w-full form-control max-w-xs mt-5'>
                             <button type="submit" className='bg-secondary input text-white text-xl' >Sign Up</button>

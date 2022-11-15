@@ -23,9 +23,9 @@ const Navbar = () => {
                 <li><Link onClick={handleSignOutUser}>Logout</Link></li>
                 :
                 <li><Link to='/login'>Login</Link></li>
-        }
-
-
+        },
+       
+       
     </React.Fragment>
 
     return (
