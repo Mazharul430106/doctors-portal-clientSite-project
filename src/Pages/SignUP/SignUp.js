@@ -8,11 +8,11 @@ const SignUp = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
     const {createUser, updateUser} = useContext(AuthContext);
     const [signupError, setSignupError] = useState('');
-    console.log(signupError);
+    // console.log(signupError);
 
     const handleSignUpForm = (data) => {
         setSignupError('')
-        // console.log(data)
+         console.log(data)
         // console.log(data.email, data.password)
         createUser(data.email, data.password)
         .then(resutl=> {
@@ -20,7 +20,7 @@ const SignUp = () => {
             console.log(user); 
             toast('User Created Successfully'); 
             const userInfo = {
-                displayName: data.name,
+                displayName: data.name
             }
             updateUser(userInfo)
             .then(()=> {})
