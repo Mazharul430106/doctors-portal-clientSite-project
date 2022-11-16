@@ -23,3 +23,4 @@ const TestimonialInfo = ({ reviewData }) => {
 };
 
 export default TestimonialInfo;
+
