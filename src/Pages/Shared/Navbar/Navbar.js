@@ -6,17 +6,17 @@ const Navbar = () => {
     const { user, signOutUser } = useContext(AuthContext);
     // console.log(user);
 
-    const handleSignOutUser = ()=> {
+    const handleSignOutUser = () => {
         signOutUser()
-        .then(()=> {})
-        .catch(error=> console.log(error))
+            .then(() => { })
+            .catch(error => console.log(error))
     }
 
     const menuItems = <React.Fragment>
         <li><Link to='/'>Home</Link></li>
         <li><Link to='/appoinment'>Appoinment</Link></li>
         <li><Link to='/about'>About</Link></li>
-        <li><Link to='/reviews'>Reviews</Link></li>
+        <li><Link to='/dashboard'>Dashboard</Link></li>
 
         {
             user?.uid ?
@@ -24,8 +24,8 @@ const Navbar = () => {
                 :
                 <li><Link to='/login'>Login</Link></li>
         },
-       
-       
+
+
     </React.Fragment>
 
     return (
@@ -46,6 +46,9 @@ const Navbar = () => {
                     {menuItems}
                 </ul>
             </div>
+            <label htmlFor="dashboard-drawer" tabIndex={0} className="btn btn-ghost lg:hidden">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" /></svg>
+            </label>
         </div>
     );
 };
