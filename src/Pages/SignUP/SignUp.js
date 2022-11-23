@@ -60,8 +60,6 @@ const SignUp = () => {
     }
 
 
-
-
     return (
         <div className='h-[700px] flex justify-center items-center'>
             <div className="card w-96 bg-base-100 shadow-xl">
